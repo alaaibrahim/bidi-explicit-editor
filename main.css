@@ -1,0 +1,20 @@
+#demo, #js, div.out {
+    width: 580px;
+}
+div.out {
+    min-height: 40px;
+    overflow: auto;
+    border: 1px solid #ACACAC;
+}
+body {
+    margin: auto;
+    width: 960px;
+    margin-top: 10px;
+}
+label {
+    font-weight: bold;
+}
+
+label em {
+    font-weight: normal;
+}
