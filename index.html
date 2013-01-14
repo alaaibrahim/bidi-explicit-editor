@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>Bidi Control Charcters Editor</title>
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.8.0/build/cssreset/cssreset-min.css">
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.8.0/build/cssbase/cssbase-min.css">
+        <link rel="stylesheet" type="text/css" href="main.css">
+    </head>
+    <body>
+        <h1>BiDi Control Character Editor</h1>
+        <p>
+        A tool to help with inserting the special BiDi Explicit Control Characters. (<em>for more details see <a href="http://www.unicode.org/reports/tr9/#Directional_Formatting_Codes" title="Unicode Bidirectional Algorithm">http://www.unicode.org/reports/tr9/#Directional_Formatting_Codes</a></em>).
+        </p>
+        <label for="demo">Input your text</label><br />
+        <input type="text" id="demo" /> <button id="copy" data-clipboard-text="test" title="Copy to clipboard">Copy</button>
+        <p>
+        <p>
+        <label for="js">String Escaped (<em>displaying all non-printable characters</em>)</label><br />
+        <input type="text" id="js" />
+        </p>
+        <label>Insert Char</label>
+        <input type="button" class="insert" value="LRM" data-action="" title="Left-To-Right Marker" />
+        <input type="button" class="insert" value="RLM" data-action="" title="Right-To-Left Marker"/>
+        <input type="button" class="insert" value="ZWJ" data-action="" title="ZeroWidth Joiner" />
+        <input type="button" class="insert" value="ZWNJ" data-action="" title="ZeroWidth Nonjoiner" />
+        </p>
+        <p>
+        <label>Wrap Selected Text</label>
+        <input type="button" id="rle" value="Force RTL" data-action="" title="Wrap Selected text in RLE(Right-To-Left Embedding) and PDF(POP Directional Formatting)"/>
+        <input type="button" id="lre" value="Force LTR" data-action="" ttile="Wrap Selected text in LRE(Left-To-Right Embedding) and PDF(POP Directional Formatting)"/>
+        </p>
+        <label for="rtlout"> RTL (<em>How would text appear if it was put in a RTL context</em>)</label>
+        <div id="rtlout" dir="rtl" class="out"></div>
+        <label for="ltrout"> LTR (<em>How would text appear if it was put in a LTR context</em>)</label>
+        <div id="ltrout" dir="ltr" class="out"></div>
+        <script src="http://yui.yahooapis.com/3.8.0/build/yui/yui-min.js"></script>
+        <script src="ZeroClipboard/ZeroClipboard.min.js"></script>
+        <script src="main-min.js"></script>
+    </body>
+</html>
