@@ -1,11 +1,10 @@
 /*jslint browser: true unparam: true*/
-/*global YUI: false, ZeroClipboard:false*/
+/*global YUI: false, Clipboard:false*/
 YUI().use('node', 'event-valuechange', function (Y) {
     'use strict';
-    var values, clip;
-    clip = new ZeroClipboard(document.getElementById('copy'), {
-        moviePath: 'ZeroClipboard/ZeroClipboard.swf'
-    });
+    var values;
+
+    new Clipboard('#copy');
 
     // Adding some extra methods to Node
     Y.Node.addMethod('getCaretPosition', function () {
@@ -106,8 +105,6 @@ YUI().use('node', 'event-valuechange', function (Y) {
         var val = e.currentTarget.get('value'), js = "", i, c;
         Y.one('#rtlout').set('text', val);
         Y.one('#ltrout').set('text', val);
-        Y.one('#copy').setAttribute('data-clipboard-text', val);
-        clip.setText(e.currentTarget.get('value'));
         for (i = 0; i < val.length; i += 1) {
             c = val.charCodeAt(i);
             if (c < 0x20) {
@@ -134,6 +131,5 @@ YUI().use('node', 'event-valuechange', function (Y) {
         Y.one('#demo').set('value', val);
         Y.one('#rtlout').set('text', val);
         Y.one('#ltrout').set('text', val);
-        Y.one('#copy').setAttribute('data-clipboard-text', val);
     });
 });

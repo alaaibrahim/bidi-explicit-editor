@@ -13,10 +13,10 @@
         A tool to help with inserting the special BiDi Control Characters. (<em>for more details see <a href="http://www.unicode.org/reports/tr9/#Directional_Formatting_Codes" title="Unicode Bidirectional Algorithm">http://www.unicode.org/reports/tr9/#Directional_Formatting_Codes</a></em>).
         </p>
         <label for="demo">Input your text</label><br />
-        <input type="text" id="demo" /> <button id="copy" data-clipboard-text="test" title="Copy to clipboard">Copy</button>
+        <input type="text" id="demo" /> <button id="copy" data-clipboard-target="#demo" title="Copy to clipboard">Copy</button>
         <p>
         <p>
-        <label for="js">String Escaped (<em>displaying all non-printable characters</em>)</label><br />
+        <label for="js">String Escaped (<em>displaying all non-printable & non-english characters</em>)</label><br />
         <input type="text" id="js" />
         </p>
         <label>Insert Char</label>
@@ -35,7 +35,7 @@
         <label for="ltrout"> LTR (<em>How would text appear if it was put in a LTR context</em>)</label>
         <div id="ltrout" dir="ltr" class="out"></div>
         <script src="http://yui.yahooapis.com/3.8.0/build/yui/yui-min.js"></script>
-        <script src="ZeroClipboard/ZeroClipboard.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
         <script src="main-min.js"></script>
     </body>
 </html>
