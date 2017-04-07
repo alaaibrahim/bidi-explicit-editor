@@ -5,6 +5,7 @@ div.out {
     min-height: 40px;
     overflow: auto;
     border: 1px solid #ACACAC;
+    margin-bottom: 1em;
 }
 body {
     margin: auto;

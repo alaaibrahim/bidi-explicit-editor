@@ -10,25 +10,27 @@
     <body>
         <h1>BiDi Control Character Editor</h1>
         <p>
-        A tool to help with inserting the special BiDi Control Characters. (<em>for more details see <a href="http://www.unicode.org/reports/tr9/#Directional_Formatting_Codes" title="Unicode Bidirectional Algorithm">http://www.unicode.org/reports/tr9/#Directional_Formatting_Codes</a></em>).
-        </p>
-        <label for="demo">Input your text</label><br />
-        <input type="text" id="demo" /> <button id="copy" data-clipboard-target="#demo" title="Copy to clipboard">Copy</button>
-        <p>
-        <p>
-        <label for="js">String Escaped (<em>displaying all non-printable & non-english characters</em>)</label><br />
-        <input type="text" id="js" />
-        </p>
-        <label>Insert Char</label>
-        <input type="button" class="insert" value="LRM" data-action="" title="Left-To-Right Marker" />
-        <input type="button" class="insert" value="RLM" data-action="" title="Right-To-Left Marker"/>
-        <input type="button" class="insert" value="ZWJ" data-action="" title="ZeroWidth Joiner" />
-        <input type="button" class="insert" value="ZWNJ" data-action="" title="ZeroWidth Nonjoiner" />
+          A tool to help with inserting the special BiDi Control Characters. (<em>for more details see <a href="http://www.unicode.org/reports/tr9/#Directional_Formatting_Codes" title="Unicode Bidirectional Algorithm">http://www.unicode.org/reports/tr9/#Directional_Formatting_Codes</a></em>).
         </p>
         <p>
-        <label>Wrap Selected Text</label>
-        <input type="button" id="rle" value="Force RTL" data-action="" title="Wrap Selected text in RLE(Right-To-Left Embedding) and PDF(POP Directional Formatting)"/>
-        <input type="button" id="lre" value="Force LTR" data-action="" ttile="Wrap Selected text in LRE(Left-To-Right Embedding) and PDF(POP Directional Formatting)"/>
+          <label for="demo">Input your text</label><br />
+          <input dir="auto" type="text" id="demo" /> <button id="copy" data-clipboard-target="#demo" title="Copy to clipboard">Copy</button>
+        </p>
+        <p>
+          <label for="js">String Escaped (<em>displaying all non-printable & non-english characters</em>)</label><br />
+          <input dir="ltr" type="text" id="js" />
+        </p>
+        <p>
+          <label>Insert Char</label>
+          <input type="button" class="insert" value="LRM" data-action="" title="Left-To-Right Marker" />
+          <input type="button" class="insert" value="RLM" data-action="" title="Right-To-Left Marker"/>
+          <input type="button" class="insert" value="ZWJ" data-action="" title="ZeroWidth Joiner" />
+          <input type="button" class="insert" value="ZWNJ" data-action="" title="ZeroWidth Nonjoiner" />
+        </p>
+        <p>
+          <label>Wrap Selected Text</label>
+          <input type="button" id="rle" value="Force RTL" data-action="" title="Wrap Selected text in RLE(Right-To-Left Embedding) and PDF(POP Directional Formatting)"/>
+          <input type="button" id="lre" value="Force LTR" data-action="" title="Wrap Selected text in LRE(Left-To-Right Embedding) and PDF(POP Directional Formatting)"/>
         </p>
         <label for="rtlout"> RTL (<em>How would text appear if it was put in a RTL context</em>)</label>
         <div id="rtlout" dir="rtl" class="out"></div>
