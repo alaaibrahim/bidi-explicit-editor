@@ -2,7 +2,18 @@
 /*global YUI: false, Clipboard:false*/
 YUI().use('node', 'event-valuechange', function (Y) {
     'use strict';
-    var values;
+    var values = {
+        LRM: '\u200E',
+        RLM: '\u200F',
+        LRE: '\u202A',
+        RLE: '\u202B',
+        PDF: '\u202C',
+        ZWJ: '\u200D',
+        ZWNJ: '\u200C'
+    };
+
+    var demoNode = Y.one('#demo');
+    var jsNode = Y.one('#js');
 
     new Clipboard('#copy');
 
@@ -76,60 +87,73 @@ YUI().use('node', 'event-valuechange', function (Y) {
     });
 
     Y.one('#rle').on('click', function (e) {
-        Y.one('#demo').highlightText('\u202B', '\u202C');
+        demoNode.highlightText('\u202B', '\u202C');
     });
 
     Y.one('#lre').on('click', function (e) {
-        Y.one('#demo').highlightText('\u202A', '\u202C');
+        demoNode.highlightText('\u202A', '\u202C');
     });
 
-    values = {
-        LRM: '\u200E',
-        RLM: '\u200F',
-        LRE: '\u202A',
-        RLE: '\u202B',
-        PDF: '\u202C',
-        ZWJ: '\u200D',
-        ZWNJ: '\u200C'
-    };
 
     Y.all('input[type=button].insert').each(function (n) {
         n.setAttribute('data-action', values[n.get('value')]);
     });
 
     Y.all('input[type=button].insert').on('click', function (e) {
-        Y.one('#demo').placeChar(e.currentTarget.getAttribute('data-action'));
+        demoNode.placeChar(e.currentTarget.getAttribute('data-action'));
     });
 
-    Y.one('#demo').on('valueChange', function (e) {
-        var val = e.currentTarget.get('value'), js = "", i, c;
-        Y.one('#rtlout').set('text', val);
-        Y.one('#ltrout').set('text', val);
-        for (i = 0; i < val.length; i += 1) {
-            c = val.charCodeAt(i);
-            if (c < 0x20) {
-                js += "\\u00" + c.toString(16);
-            } else if (c < 0x7f) {
-                js += val[i];
-            } else if (c < 0x100) {
-                js += "\\u00" + c.toString(16);
-            } else if (c < 0x1000) {
-                js += "\\u0" + c.toString(16);
-            } else {
-                js += "\\u" + c.toString(16);
-            }
+    function setDemoNodeValue(value, options) {
+        var _ref = options || {};
+        var _ref$setNode = _ref.setNode,
+            setNode = _ref$setNode === undefined ? true : _ref$setNode,
+            _ref$setJS = _ref.setJS,
+            setJS = _ref$setJS === undefined ? true : _ref$setJS,
+            _ref$setHash = _ref.setHash,
+            setHash = _ref$setHash === undefined ? true : _ref$setHash;
+
+        var js = "",
+            i,
+            c;
+        if (setNode) {
+            demoNode.set('value', value);
         }
-        Y.one('#js').set('value', js);
+        Y.one('#rtlout').set('text', value);
+        Y.one('#ltrout').set('text', value);
+
+        if (setJS) {
+            js = value.replace(/[\u0000-\u000f]/g, function (match) {
+                return '\\u000' + match.charCodeAt(0).toString(16);
+            }).replace(/[\u0010-\u001f\u007f-\u009f\u00ad]/g, function (match) {
+                return '\\u00' + match.charCodeAt(0).toString(16);
+            }).replace(/[\u0100-\u0fff]/g, function (match) {
+                return '\\u0' + match.charCodeAt(0).toString(16);
+            }).replace(/[\u1000-\uffff]/g, function (match) {
+                return '\\u' + match.charCodeAt(0).toString(16);
+            });
+
+            jsNode.set('value', js);
+        }
+
+        if (setHash) {
+            window.location.hash = encodeURIComponent(value);
+        }
+    }
+    demoNode.on('valueChange', function (e) {
+        var val = e.currentTarget.get('value');
+        setDemoNodeValue(val);
     });
-    Y.one('#js').on('valueChange', function (e) {
+    jsNode.on('valueChange', function (e) {
         var val = e.currentTarget.get('value').replace(
             /\\u([\da-f]{4})/g,
             function (m, p1) {
                 return String.fromCharCode(parseInt(p1, 16));
             }
         );
-        Y.one('#demo').set('value', val);
-        Y.one('#rtlout').set('text', val);
-        Y.one('#ltrout').set('text', val);
+        setDemoNodeValue(val, { setJS: false });
     });
+
+    if (window.location.hash) {
+        setDemoNodeValue(decodeURIComponent(window.location.hash.substr(1)), { setHash: false });
+    }
 });
