@@ -14,6 +14,7 @@ YUI().use('node', 'event-valuechange', function (Y) {
 
     var Lookup = {
         '\u0020': 'SPACE',
+        '\u00A0': 'NBSP',
         '\u200D': 'ZWJ',
         '\u200C': 'ZWNJ',
         '\u200E': 'LRM',
