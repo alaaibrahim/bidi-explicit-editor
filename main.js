@@ -12,6 +12,22 @@ YUI().use('node', 'event-valuechange', function (Y) {
         ZWNJ: '\u200C'
     };
 
+    var Lookup = {
+        '\u200D': 'ZWJ',
+        '\u200C': 'ZWNJ',
+        '\u200E': 'LRM',
+        '\u200F': 'RLM',
+        '\u202A': 'LRE',
+        '\u202B': 'RLE',
+        '\u202C': 'PDF',
+        '\u202D': 'LRO',
+        '\u202E': 'RLO',
+        '\u2066': 'LRI',
+        '\u2067': 'RLI',
+        '\u2068': 'FSI',
+        '\u2069': 'PDI',
+    }
+
     var demoNode = Y.one('#demo');
     var jsNode = Y.one('#js');
 
@@ -113,6 +129,11 @@ YUI().use('node', 'event-valuechange', function (Y) {
             setHash = _ref$setHash === undefined ? true : _ref$setHash;
 
         var js = "",
+            trs = [
+                "",
+                ""
+            ],
+            trIdx = 0,
             i,
             c;
         if (setNode) {
@@ -138,10 +159,29 @@ YUI().use('node', 'event-valuechange', function (Y) {
         if (setHash) {
             window.location.hash = encodeURIComponent(value);
         }
+        for (i = 0; i < value.length; i ++) {
+            if (i !== 0 && i % 12 === 0) {
+                trIdx += 2;
+                trs[trIdx]='';
+                trs[trIdx+1]='';
+            }
+            c = value.charAt(i);
+            trs[trIdx]+='<th>' + i + '</th>';
+            if (Lookup[c]) {
+                trs[trIdx+1]+='<td class="special">' + Lookup[c] + '</td>';
+            } else {
+                trs[trIdx+1]+='<td>' + c + '</td>';
+            }
+        }
+        var tableInner = "";
+        for (i = 0; i < trs.length; i++) {
+            tableInner += '<tr>' + trs[i] + '</tr>';
+        }
+        Y.one('#order').set('innerHTML', tableInner);
     }
     demoNode.on('valueChange', function (e) {
         var val = e.currentTarget.get('value');
-        setDemoNodeValue(val);
+        setDemoNodeValue(val, { setNode: false });
     });
     jsNode.on('valueChange', function (e) {
         var val = e.currentTarget.get('value').replace(

@@ -18,3 +18,14 @@ label {
 label em {
     font-weight: normal;
 }
+
+#order th {
+    background-color: grey;
+    width: 30px;
+}
+#order td {
+    text-align: center;
+}
+#order td.special {
+    font-size: 10px;
+}
