@@ -13,6 +13,7 @@ YUI().use('node', 'event-valuechange', function (Y) {
     };
 
     var Lookup = {
+        '\u0020': 'SPACE',
         '\u200D': 'ZWJ',
         '\u200C': 'ZWNJ',
         '\u200E': 'LRM',
